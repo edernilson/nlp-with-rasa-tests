@@ -45,3 +45,20 @@ nlu:
     - Que dia da semana é [ele](data)
     - O dia da semana
     - Diga-me que dia é hoje [hoje](data)
+
+- intent: lista_pedidos
+  examples: |
+    - Me mostre a lista de pedidos de [hoje](data) do cenario [001]{"entity": "cenario", "value": "001"}
+    - Liste os pedidos da data de [01/01/2023](data) do cenario [001]{"entity": "cenario", "value": "001"}
+    - Eu quero a lista de pedidos de [ontem](data) do cenario [001]{"entity": "cenario", "value": "001"}
+    - Selecione os pedidos de [amanha](data) do cenario [001]{"entity": "cenario", "value": "001"}
+
+- intent: filtro_remove_cenario
+  examples: |
+    - Refaca a consulta de pedidos com todos os cenarios
+    - Retire o cenario da consulta
+
+- synonym: pedidos
+  examples: |
+    - ordens
+

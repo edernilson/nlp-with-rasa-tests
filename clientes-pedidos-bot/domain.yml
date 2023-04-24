@@ -9,24 +9,52 @@ intents:
   - query_time
   - query_date
   - query_weekday
+  - lista_pedidos:
+      use_entities:
+        - pedido
+        - data
+        - cenario  
 
 entities:
+  - pedido
   - data
+  - cenario
+  - data_formatada
 
 slots:
+  pedido:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pedido
   data:
     type: text
     mappings:
     - type: from_entity
       entity: data
+  data_formatada:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: data_formatada
+  cenario:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: cenario    
 
 responses:
   utter_greet:
-    - text: Olá, sou o Silly, posso verificar a hora, a data e o dia da semana para você. Você pode me perguntar "que horas são agora?", "que dia é hoje?" ou "que dia é amanhã?"
+    - text: Olá, sou um Bot, posso verificar a hora, a data e o dia da semana para você. Você pode me perguntar "que horas são agora?", "que dia é hoje?" ou "que dia é amanhã?"
   utter_goodbye:
     - text: Até logo!
+  utter_lista_pedidos:
+  - text: "Mostrando a lista de pedidos do dia {data_formatada}"
 
 actions:
+  - action_remove_cenario
+  - action_lista_pedidos
   - action_query_time
   - action_query_date
   - action_query_weekday

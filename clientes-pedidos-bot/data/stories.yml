@@ -21,3 +21,12 @@ stories:
     steps:
       - intent: goodbye
       - action: utter_goodbye
+  - story: lista pedidos
+    steps:
+    - intent: lista_pedidos
+    - action: action_lista_pedidos
+  - story: Remove cenario do filtro
+    steps:
+    - intent: filtro_remove_cenario
+    - action: action_remove_cenario    
+    - action: action_lista_pedidos    

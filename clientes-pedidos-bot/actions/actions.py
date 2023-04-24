@@ -9,6 +9,9 @@ from datetime import datetime, timedelta
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import (
+    SlotSet,
+)
 
 def text_date_to_int(text_date):
     print("text_date {}".format(text_date))
@@ -101,3 +104,55 @@ class ActionQueryWeekday(Action):
             dispatcher.utter_message(text="O sistema atualmente não oferece suporte à consulta de dia da semana para '{}'".format(text_date))
 
         return []
+    
+class ActionListaPedidos(Action):
+
+    def name(self) -> Text:
+        return "action_lista_pedidos"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        # print("****************************")
+        # print(tracker)
+        # print("############################")
+        # print(domain)
+        # print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        text_date = tracker.get_slot("data") or "hoje"
+        text_cenario_code = tracker.get_slot("cenario") or None
+
+        int_date = text_date_to_int(text_date)
+        dia = None
+        if int_date is not None:
+            delta = timedelta(days=int_date)
+            current_date = datetime.now()
+
+            target_date = current_date + delta
+
+            dia = target_date.strftime("%d/%m/%Y")
+            
+            response = { "comando": "lista_pedidos", "data": dia, "cenario": text_cenario_code }
+
+            data_formatada = {
+                "data_formatada": dia
+            }
+
+            dispatcher.utter_message(response="utter_lista_pedidos", **data_formatada)
+            dispatcher.utter_message("COMMAND=>" + str(response))
+        else:
+            dispatcher.utter_message(text="O sistema atualmente não suporta consulta de data para '{}'".format(text_date))
+
+        return [SlotSet("data_formatada", dia)]
+    
+class ActionRemoveCenario(Action):
+
+    def name(self) -> Text:
+        return "action_remove_cenario"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        return [SlotSet("cenario", None)]
+
