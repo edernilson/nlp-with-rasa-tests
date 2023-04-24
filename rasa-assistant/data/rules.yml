@@ -1,0 +1,26 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+# - rule: active Listar pedidos
+#   steps:
+#   - intent: lista_pedidos  
+#   - action: pedidos_form
+#   - action: pedidos_form
+
+# - rule: submit Listar pedidos
+#   condition: 
+#     - active_loop: pedidos_form
+#   steps:
+#   - intent: pedidos_form
+#   - action: utter_lista_pedidos

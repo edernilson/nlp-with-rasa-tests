@@ -1,0 +1,34 @@
+version: "3.1"
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+  - greet
+  - goodbye
+  - query_time
+  - query_date
+  - query_weekday
+
+entities:
+  - data
+
+slots:
+  data:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: data
+
+responses:
+  utter_greet:
+    - text: Olá, sou o Silly, posso verificar a hora, a data e o dia da semana para você. Você pode me perguntar "que horas são agora?", "que dia é hoje?" ou "que dia é amanhã?"
+  utter_goodbye:
+    - text: Até logo!
+
+actions:
+  - action_query_time
+  - action_query_date
+  - action_query_weekday
+  - utter_goodbye
+  - utter_greet

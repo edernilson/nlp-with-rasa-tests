@@ -1,0 +1,12 @@
+slots:
+  data:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: pedidos_form
+        requested_slot: data
+forms:
+  pedidos_form:
+    required_slots:
+    - data
