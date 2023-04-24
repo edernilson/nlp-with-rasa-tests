@@ -1,0 +1,64 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - oi 
+    - olá 
+    - oi 
+    - bom dia 
+    - boa tarde
+    - boa noite 
+    - vamos lá 
+    - ei cara 
+
+- intent: goodbye
+  examples: |
+    - até logo 
+    - boa noite 
+    - tchau 
+    - tenha um bom dia 
+    - até mais 
+    - tchau tchau 
+
+- intent: query_time
+  examples: |
+    - Que horas são agora
+    - Que horas são
+    - Quantas horas são
+    - Que horas são agora
+    - Quando é
+    - A hora agora
+
+- intent: query_date
+  examples: |
+    - Qual é a data de [amanha](data)
+    - A data de [ontem](data)
+    - Qual é a data [hoje](data)
+    - Que data é [hoje](data)
+    - Data de [Hoje](data)
+    - Que data é [issa](data)
+
+- intent: query_weekday
+  examples: |
+    - Que dia é [hoje](data)
+    - Que dia da semana é [ele](data)
+    - O dia da semana
+    - Diga-me que dia é hoje [hoje](data)
+
+- intent: lista_pedidos
+  examples: |
+    - Me mostre a lista de pedidos de [hoje](data) do cenario [001]{"entity": "cenario", "value": "001"}
+    - Liste os pedidos da data de [01/01/2023](data) do cenario [001]{"entity": "cenario", "value": "001"}
+    - Eu quero a lista de pedidos de [ontem](data) do cenario [001]{"entity": "cenario", "value": "001"}
+    - Selecione os pedidos de [amanha](data) do cenario [001]{"entity": "cenario", "value": "001"}
+
+- intent: filtro_remove_cenario
+  examples: |
+    - Refaca a consulta de pedidos com todos os cenarios
+    - Retire o cenario da consulta
+
+- synonym: pedidos
+  examples: |
+    - ordens
+
